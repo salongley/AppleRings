@@ -1,0 +1,156 @@
+package main
+
+import (
+	"os"
+
+	"github.com/aws/aws-cdk-go/awscdk"
+	"github.com/aws/aws-cdk-go/awscdk/awscognito"
+	"github.com/aws/aws-cdk-go/awscdk/awsiam"
+	"github.com/aws/aws-cdk-go/awscdk/awslambda"
+	"github.com/aws/aws-cdk-go/awscdk/awss3"
+	"github.com/aws/aws-cdk-go/awscdk/awsapigateway"
+	"github.com/aws/constructs-go/constructs/v10"
+	"github.com/aws/jsii-runtime-go"
+)
+
+type MyCdkStackProps struct {
+	awscdk.StackProps
+}
+
+func NewMyCdkStack(scope constructs.Construct, id string, props *MyCdkStackProps) awscdk.Stack {
+	stack := awscdk.NewStack(scope, &id, &props.StackProps)
+
+	// Cognito User Pool
+	userPool := awscognito.NewUserPool(stack, jsii.String("MyUserPool"), &awscognito.UserPoolProps{
+		UserPoolName: jsii.String("MyUserPool"),
+		AutoVerify: &awscognito.AutoVerifiedAttrs{
+			Email: jsii.Bool(true),
+		},
+		PasswordPolicy: &awscognito.PasswordPolicy{
+			MinLength:    jsii.Number(8),
+			RequireUppercase: jsii.Bool(true),
+			RequireLowercase: jsii.Bool(true),
+			RequireNumbers:   jsii.Bool(true),
+			RequireSymbols:   jsii.Bool(true),
+		},
+	})
+
+	// Cognito User Pool Client
+	userPoolClient := awscognito.NewUserPoolClient(stack, jsii.String("MyUserPoolClient"), &awscognito.UserPoolClientProps{
+		UserPool: userPool,
+		GenerateSecret: jsii.Bool(false),
+		OAuth: &awscognito.OAuthSettings{
+			Flows: &awscognito.OAuthFlows{
+				AuthorizationCodeGrant: jsii.Bool(true),
+			},
+			Scopes: &[]awscognito.OAuthScope{
+				awscognito.OAuthScope_EMAIL(),
+				awscognito.OAuthScope_OPENID(),
+				awscognito.OAuthScope_PROFILE(),
+			},
+			CallbackUrls: &[]*string{
+				jsii.String("https://example.com/callback"),
+			},
+			LogoutUrls: &[]*string{
+				jsii.String("https://example.com/logout"),
+			},
+		},
+	})
+
+	// Cognito Identity Pool
+	identityPool := awscognito.NewCfnIdentityPool(stack, jsii.String("MyIdentityPool"), &awscognito.CfnIdentityPoolProps{
+		AllowUnauthenticatedIdentities: jsii.Bool(false),
+		CognitoIdentityProviders: &[]*awscognito.CfnIdentityPool_CognitoIdentityProviderProperty{
+			{
+				ClientId: userPoolClient.UserPoolClientId(),
+				ProviderName: userPool.UserPoolProviderName(),
+			},
+		},
+		IdentityPoolName: jsii.String("MyIdentityPool"),
+	})
+
+	// IAM Role for authenticated users
+	authRole := awsiam.NewRole(stack, jsii.String("AuthRole"), &awsiam.RoleProps{
+		AssumedBy: awsiam.NewFederatedPrincipal(jsii.String("cognito-identity.amazonaws.com"),
+			map[string]interface{}{
+				"StringEquals": map[string]interface{}{
+					"cognito-identity.amazonaws.com:aud": identityPool.Ref(),
+				},
+				"ForAnyValue:StringLike": map[string]interface{}{
+					"cognito-identity.amazonaws.com:amr": jsii.String("authenticated"),
+				},
+			}, jsii.String("sts:AssumeRoleWithWebIdentity")),
+	})
+
+	authRole.AddManagedPolicy(awsiam.ManagedPolicy_FromAwsManagedPolicyName(jsii.String("AmazonDynamoDBFullAccess")))
+	authRole.AddManagedPolicy(awsiam.ManagedPolicy_FromAwsManagedPolicyName(jsii.String("AmazonAPIGatewayInvokeFullAccess")))
+
+	// S3 bucket for static site
+	staticSiteBucket := awss3.NewBucket(stack, jsii.String("MyStaticSiteBucket"), &awss3.BucketProps{
+		PublicReadAccess: jsii.Bool(false),
+		WebsiteIndexDocument: jsii.String("index.html"),
+	})
+
+	// Lambda function for handling form submission (e.g., CreateOrganization)
+	createOrgLambda := awslambda.NewFunction(stack, jsii.String("CreateOrgLambda"), &awslambda.FunctionProps{
+		Runtime: awslambda.Runtime_GO_1_X(),
+		Handler: jsii.String("main"),
+		Code:    awslambda.Code_FromAsset(jsii.String("./create_org/")),
+		Environment: &map[string]*string{
+			"TABLE_NAME": jsii.String("MyDynamoDBTable"),
+		},
+	})
+
+	// API Gateway with Cognito Authorizer
+	api := awsapigateway.NewRestApi(stack, jsii.String("MyApi"), &awsapigateway.RestApiProps{
+		RestApiName: jsii.String("MyApiWithCognito"),
+		DefaultMethodOptions: &awsapigateway.MethodOptions{
+			AuthorizationType: awsapigateway.AuthorizationType_COGNITO(),
+			Authorizer: awsapigateway.NewCognitoUserPoolsAuthorizer(stack, jsii.String("CognitoAuthorizer"), &awsapigateway.CognitoUserPoolsAuthorizerProps{
+				CognitoUserPools: &[]awscognito.IUserPool{userPool},
+			}),
+		},
+	})
+
+	// API Gateway Resource for Lambda
+	orgResource := api.Root().AddResource(jsii.String("organization"))
+	orgResource.AddMethod(jsii.String("POST"), awsapigateway.NewLambdaIntegration(createOrgLambda))
+
+	// API Gateway Resource for static site
+	staticResource := api.Root().AddResource(jsii.String("static"))
+	staticResource.AddMethod(jsii.String("GET"), awsapigateway.NewS3Integration(staticSiteBucket), &awsapigateway.MethodOptions{
+		AuthorizationType: awsapigateway.AuthorizationType_COGNITO(),
+	})
+
+	// Output values
+	awscdk.NewCfnOutput(stack, jsii.String("UserPoolId"), &awscdk.CfnOutputProps{
+		Value: userPool.UserPoolId(),
+	})
+	awscdk.NewCfnOutput(stack, jsii.String("IdentityPoolId"), &awscdk.CfnOutputProps{
+		Value: identityPool.Ref(),
+	})
+	awscdk.NewCfnOutput(stack, jsii.String("UserPoolClientId"), &awscdk.CfnOutputProps{
+		Value: userPoolClient.UserPoolClientId(),
+	})
+
+	return stack
+}
+
+func main() {
+	app := awscdk.NewApp(nil)
+
+	NewMyCdkStack(app, "MyCdkStack", &MyCdkStackProps{
+		awscdk.StackProps{
+			Env: env(),
+		},
+	})
+
+	app.Synth(nil)
+}
+
+func env() *awscdk.Environment {
+	return &awscdk.Environment{
+		Region:  jsii.String(os.Getenv("CDK_DEFAULT_REGION")),
+		Account: jsii.String(os.Getenv("CDK_DEFAULT_ACCOUNT")),
+	}
+}
