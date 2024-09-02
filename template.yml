@@ -1,0 +1,225 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: SAM Template for Lambda, API Gateway, S3, and DynamoDB
+
+Resources:
+
+  MyRestApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: MyRestApi
+      StageName: Prod
+      EndpointConfiguration: REGIONAL
+
+  MyDynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Organizations
+      AttributeDefinitions:
+        - AttributeName: PK
+          AttributeType: S
+        - AttributeName: SK
+          AttributeType: S
+        - AttributeName: EntityType
+          AttributeType: S
+      KeySchema:
+        - AttributeName: PK
+          KeyType: HASH
+        - AttributeName: SK
+          KeyType: RANGE
+      GlobalSecondaryIndexes:
+        - IndexName: EntityTypeIndex
+          KeySchema:
+            - AttributeName: EntityType
+              KeyType: HASH
+            - AttributeName: SK
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+      BillingMode: PAY_PER_REQUEST
+
+  MyStaticSiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: my-static-site-bucket
+
+  MyStaticSiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref MyStaticSiteBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Deny
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "arn:aws:s3:::${MyStaticSiteBucket}/*"
+            Condition:
+              StringNotLike:
+                aws:Referer: "https://${MyRestApi}.execute-api.${AWS::Region}.amazonaws.com/*"
+
+  ApiGatewayS3IntegrationRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: apigateway.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: S3AccessPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource: !Sub "arn:aws:s3:::${MyStaticSiteBucket}/*"
+
+  StaticSiteApiResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !GetAtt MyRestApi.RootResourceId
+      PathPart: static-site
+      RestApiId: !Ref MyRestApi
+
+  StaticSiteProxyResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId: !Ref StaticSiteApiResource
+      PathPart: "{proxy+}"
+      RestApiId: !Ref MyRestApi
+
+  GetStaticSiteMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      AuthorizationType: NONE
+      HttpMethod: GET
+      ResourceId: !Ref StaticSiteProxyResource
+      RestApiId: !Ref MyRestApi
+      Integration:
+        IntegrationHttpMethod: GET
+        Type: AWS
+        Uri: !Sub
+          - "arn:aws:apigateway:${AWS::Region}:s3:path/${MyStaticSiteBucket}/{proxy}"
+        Credentials: !GetAtt ApiGatewayS3IntegrationRole.Arn
+        RequestParameters:
+          integration.request.path.proxy: method.request.path.proxy
+        PassthroughBehavior: WHEN_NO_TEMPLATES
+        ContentHandling: CONVERT_TO_TEXT
+        IntegrationResponses:
+          - StatusCode: 200
+            ResponseParameters:
+              method.response.header.Content-Type: "integration.response.header.Content-Type"
+      RequestParameters:
+        method.request.path.proxy: true
+      MethodResponses:
+        - StatusCode: 200
+          ResponseParameters:
+            method.response.header.Content-Type: true
+
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: DynamoDBAccessPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:PutItem
+                  - dynamodb:UpdateItem
+                  - dynamodb:GetItem
+                  - dynamodb:Query
+                  - dynamodb:DeleteItem
+                Resource: !GetAtt MyDynamoDBTable.Arn
+
+  CreateOrganizationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main
+      Runtime: go1.x
+      CodeUri: ./create_org/
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyRestApi
+            Path: /organization
+            Method: POST
+
+  GetOrganizationsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main
+      Runtime: go1.x
+      CodeUri: ./get_orgs/
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyRestApi
+            Path: /organizations
+            Method: GET
+
+  GetOrganizationByIdFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main
+      Runtime: go1.x
+      CodeUri: ./get_org_by_id/
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyRestApi
+            Path: /organization/{id}
+            Method: GET
+
+  UpdateOrganizationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main
+      Runtime: go1.x
+      CodeUri: ./update_org/
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyRestApi
+            Path: /organization/{id}
+            Method: PUT
+
+  DeleteOrganizationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main
+      Runtime: go1.x
+      CodeUri: ./delete_org/
+      Role: !GetAtt LambdaExecutionRole.Arn
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyRestApi
+            Path: /organization/{id}
+            Method: DELETE
+
+Outputs:
+  ApiUrl:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${MyRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
