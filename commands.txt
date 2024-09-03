@@ -1,8 +1,0 @@
-npm install -g aws-cdk
-
-mkdir my-cdk-app
-cd my-cdk-app
-cdk init app --language go
-
-go mod init my-cdk-app
-go get github.com/aws/aws-cdk-go/awscdk
