@@ -1,0 +1,759 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fswiss\fcharset0 Helvetica;\f2\fnil\fcharset0 AppleColorEmoji;
+\f3\fnil\fcharset0 HelveticaNeue-Bold;\f4\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red38\green38\blue38;\red91\green91\blue91;
+\red242\green242\blue242;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c20000\c20000\c20000;\cssrgb\c43137\c43137\c43137;
+\cssrgb\c96078\c96078\c96078;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}
+{\list\listtemplateid5\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid401\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid5}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}{\listoverride\listid5\listoverridecount0\ls5}}
+\paperw11905\paperh16837\margl1133\margr1133\margb1133\margt1133
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs22 \cf2 \up0 \nosupersub \ulnone \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab20\partightenfactor0
+
+\f1\fs36 \cf2 AWS Lambda Runtime Languages: Node.js,\
+Python, Java, Go, and .NET (C#)\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab20\partightenfactor0
+
+\fs18 \cf2 AWS Lambda supports many runtimes, but Node.js and Python dominate usage, together accounting\
+for well over half of all function invocations . This reflects their mature tooling, ease of use, and large\
+communities. Java is a distant third (often legacy migrations), followed by Go (increasingly popular) and\
+.NET (C#). Each language offers trade\uc0\u8209 offs in ease of development, operations, and performance. We\
+compare them below for a simple CRUD-based serverless API scenario.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab20\partightenfactor0
+
+\fs12 \cf3 1\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab20\partightenfactor0
+
+\fs27 \cf2 Developer Experience\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab20\partightenfactor0
+
+\fs18 \cf2 Node.js and Python are by far the most common Lambda languages (over 50% of invocations) 
+\fs12 \cf3 1\
+
+\fs18 \cf2 . Both have\
+rich ecosystems, official AWS support, and many examples/tutorials. Common development tools like\
+the AWS Serverless Application Model (SAM) and AWS CDK support JavaScript/TypeScript and Python\
+out of the box, and AWS provides templates (e.g. TypeScript templates) to scaffold projects. In practice,\
+many developers find Node.js slightly more convenient for Lambda: modern bundlers (esbuild,\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab20\partightenfactor0
+
+\fs12 \cf3 2\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab20\partightenfactor0
+
+\fs18 \cf2 webpack) can tree\uc0\u8209 shake dependencies for smaller packages , npm / yarn workspaces simplify\
+monorepo management, and the new AWS SDK for JavaScript (v3) offers a modular, fully Typed API\
+(though its command/send style can be verbose) 
+\fs12 \cf3 3\
+
+\fs18 \cf2 . In one analysis, Node.js edged out Python in\
+overall developer\uc0\u8209 experience (38 vs 35 points) 
+\fs12 \cf3 4\
+
+\fs18 \cf2 . Python is nearly as popular due to its simplicity and\
+concise syntax, and it benefits from tools like virtualenv/Poetry and AWS Chalice. Developers appreciate\
+Python\'92s readability, but they note that packaging can be trickier (no bundler to trim unused code\
+means large dependencies like boto3 may inflate package size) 
+\fs12 \cf3 2\
+
+\fs18 \cf2 . Also, the AWS SDK for Python\
+(boto3) is synchronous only, which can complicate async code and earned Python a slightly lower score\
+for SDK experience 
+\fs12 \cf3 3\
+
+\fs18 \cf2 . Overall, both Node.js and Python enjoy broad support (IDE plugins, linters like\
+ESLint/Flake8, formatters like Prettier/Black) and rapid iteration with AWS Toolkit/SAM, making them\
+excellent choices for Lambda development.\
+\'95\
+\'95\
+\'95\
+\'95\
+Node.js: Strengths \'96 huge ecosystem, excellent monorepo and bundling support, fast startup,\
+strong TypeScript support. Weaknesses \'96 managing node_modules bloat, callback/Promise\
+complexity, single-threaded nature. High DX: Node often rates top for ease of writing/deploying\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab20\partightenfactor0
+
+\fs12 \cf3 5\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab20\partightenfactor0
+
+\fs18 \cf2 Lambdas .\
+Python: Strengths \'96 very concise code, extensive libraries (especially for data/ML), built-in AWS\
+SDK. Weaknesses \'96 larger deployment packages (no tree\uc0\u8209 shaking) 
+\fs12 \cf3 2\
+
+\fs18 \cf2 , lack of native async AWS\
+SDK (boto3), and modest IDE toolsets (though improving). DX is strong (lots of Lambda\
+examples), but slightly edged out by Node in packaging and dependency management.\
+Java: Strengths \'96 robust enterprise tooling (IDE support, Maven/Gradle, Spring), static typing,\
+mature AWS SDK (v2/v3) with async and sync clients , and clear concurrency constructs (e.g.\
+CompletableFuture ) that developers find elegant 
+\fs12 \cf3 7\
+
+\fs18 \cf2 . Packaging is straightforward (build a\
+fat JAR via Maven) 
+\fs12 \cf3 8\
+
+\fs18 \cf2 . Weaknesses \'96 verbose code and boilerplate, longer build/test cycles.\
+AWS IntelliJ/VS Code plugins help, but the initial setup (especially managing Java projects) is\
+heavier than scripting languages.\
+Go: Strengths \'96 simple syntax and tooling (fast compiler, single-binary deployment), good\
+concurrency model (goroutines), native AWS SDK v2, and very fast cold starts. Built-in code\
+formatting and linting ease style consistency. Weaknesses \'96 smaller standard library/community\
+(fewer high-level frameworks), manual dependency setup (Go modules, no built-in project\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab20\partightenfactor0
+
+\fs12 \cf3 6\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardeftab20\partightenfactor0
+
+\fs18 \cf4 1\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs22 \cf2 \
+\pard\pardeftab560\partightenfactor0
+
+\fs26 \cf2 TypeScript and Go are two very different languages in terms of their design philosophy, use cases, and ecosystems. Comparing their standard libraries is a useful exercise to understand their strengths, limitations, and intended audiences. Here's a detailed comparison:\
+\
+\pard\pardeftab560\sa40\partightenfactor0
+
+\f2\fs32 \cf2 \uc0\u55356 \u57104 
+\f3\b  Philosophy and Design Goals\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clshdrawnil \clwWidth2980\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\qc\partightenfactor0
+
+\fs26 \cf2 Feature
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\qc\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Go
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\qc\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone TypeScript
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clcbpat5 \clwWidth2980\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Language Type
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Compiled, statically typed
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Superset of JavaScript, statically typed (via annotations)
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clshdrawnil \clwWidth2980\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Runtime
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Standalone runtime (compiled binaries)
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Runs in JavaScript runtime (Node.js, browser)
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clcbpat5 \clwWidth2980\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Standard Library Scope
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Broad, batteries-included
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Thin, defers to JavaScript/Node APIs
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clshdrawnil \clwWidth2980\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Design Principle
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Minimalism, simplicity, consistency
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Interoperability with JS, gradual typing
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone 
+\f3\b\fs32 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab560\sa40\partightenfactor0
+
+\f2\b0 \cf2 \uc0\u55357 \u56550 
+\f3\b  Standard Library Contents\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight620 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clshdrawnil \clwWidth2980\clftsWidth3 \clheight620 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight620 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\qc\partightenfactor0
+
+\fs26 \cf2 Category
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\qc\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Go (stdlib)
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\qc\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone TypeScript (via JavaScript/Node stdlib)
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clcbpat5 \clwWidth2980\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Networking
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone net, net/http, net/smtp, etc.
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone HTTP via fetch, http in Node.js
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clshdrawnil \clwWidth2980\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Filesystem
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone os, io/ioutil (deprecated in favor of os, io)
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone fs (Node.js)
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clcbpat5 \clwWidth2980\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Concurrency
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Goroutines, channels (sync, context)
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone None natively; async/await, Promises in JS
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clshdrawnil \clwWidth2980\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Cryptography
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone crypto, hash, encoding/base64, etc.
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone crypto (Node.js); Web Crypto API (browser)
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clcbpat5 \clwWidth2980\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Encoding/Decoding
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone encoding/json, encoding/xml, encoding/csv
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone JSON (built-in), other via npm
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clshdrawnil \clwWidth2980\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Date/Time
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone time
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Date object (limited), plus third-party libraries like date-fns, luxon
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clcbpat5 \clwWidth2980\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone File I/O
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone os, io, bufio
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone fs (Node.js)
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clshdrawnil \clwWidth2980\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Testing
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone testing, go test
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone No built-in test framework; use jest, mocha, etc.
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clcbpat5 \clwWidth2980\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Logging
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone log, log/slog (since Go 1.21)
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone console.log, or libraries like winston, pino
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clshdrawnil \clwWidth2980\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone System Programming
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone syscall, os/exec
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Very limited in JS/TS; use Node.js APIs or child_process
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clcbpat5 \clwWidth2980\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Templating
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone text/template, html/template
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone No standard support; use libraries like Handlebars, EJS
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clshdrawnil \clwWidth2980\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Process Management
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone os, os/exec
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Node.js: child_process
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clcbpat5 \clwWidth2980\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Compression
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone compress/gzip, flate, zlib, etc.
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Node.js: zlib, third-party
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clshdrawnil \clwWidth2980\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone CLI Utilities
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone flag, fmt, os.Args
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Node.js: process.argv, third-party like yargs
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clcbpat5 \clwWidth2980\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Reflection
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone reflect
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone TypeScript type system is erased at runtime
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone 
+\f3\b\fs32 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab560\sa40\partightenfactor0
+
+\f2\b0 \cf2 \uc0\u55358 \u56817 
+\f3\b  Bundled vs Modular Ecosystem\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clshdrawnil \clwWidth2980\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\qc\partightenfactor0
+
+\fs26 \cf2 Aspect
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\qc\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Go
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\qc\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone TypeScript
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clcbpat5 \clwWidth2980\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight880 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Bundled Tools
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Formatter (gofmt), linter, doc tool, test runner, build tool all included
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone External tools: tsc, eslint, jest, etc.
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clshdrawnil \clwWidth2980\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clshdrawnil \clwWidth3000\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Package Management
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone go mod (built-in)
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone npm, yarn, pnpm (external)
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx2880
+\clvertalt \clcbpat5 \clwWidth2980\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx5760
+\clvertalt \clcbpat5 \clwWidth3000\clftsWidth3 \clheight580 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Standard Library
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Central, consistent API surface
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Thin; relies on a large ecosystem
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone 
+\f3\b\fs32 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab560\sa40\partightenfactor0
+
+\f2\b0 \cf2 \uc0\u55357 \u56589 
+\f3\b  Strengths and Weaknesses\
+
+\f2\b0 \uc0\u9989 
+\f3\b  Go Standard Library Strengths\
+\pard\tx20\tx808\pardeftab560\li808\fi-809\partightenfactor0
+\ls1\ilvl0
+\f4\b0\fs26 \cf2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f0 \up0 \nosupersub \ulnone Very comprehensive for systems and backend development.\
+\ls1\ilvl0
+\f4 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f0 \up0 \nosupersub \ulnone Consistent API design and strong documentation.\
+\ls1\ilvl0
+\f4 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f0 \up0 \nosupersub \ulnone Encourages simplicity and minimal external dependencies.\
+\ls1\ilvl0
+\f4 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f0 \up0 \nosupersub \ulnone Excellent for CLI, networked services, APIs.\
+\pard\pardeftab560\sa40\partightenfactor0
+
+\f2\fs32 \cf2 \uc0\u9989 
+\f3\b  TypeScript Strengths (via JavaScript/Node)\
+\pard\tx20\tx808\pardeftab560\li808\fi-809\partightenfactor0
+\ls2\ilvl0
+\f4\b0\fs26 \cf2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f0 \up0 \nosupersub \ulnone Huge ecosystem via npm.\
+\ls2\ilvl0
+\f4 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f0 \up0 \nosupersub \ulnone Great for web development and cross-platform scripting.\
+\ls2\ilvl0
+\f4 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f0 \up0 \nosupersub \ulnone Flexibility and interop with browser and server environments.\
+\ls2\ilvl0
+\f4 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f0 \up0 \nosupersub \ulnone Modern async/await model and rich UI/browser API access.\
+\pard\pardeftab560\sa40\partightenfactor0
+
+\f2\fs32 \cf2 \uc0\u10060 
+\f3\b  Go Weaknesses\
+\pard\tx20\tx808\pardeftab560\li808\fi-809\partightenfactor0
+\ls3\ilvl0
+\f4\b0\fs26 \cf2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f0 \up0 \nosupersub \ulnone No built-in GUI or web framework.\
+\ls3\ilvl0
+\f4 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f0 \up0 \nosupersub \ulnone Limited native support for modern frontend concepts.\
+\ls3\ilvl0
+\f4 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f0 \up0 \nosupersub \ulnone Verbose error handling without exceptions.\
+\pard\pardeftab560\sa40\partightenfactor0
+
+\f2\fs32 \cf2 \uc0\u10060 
+\f3\b  TypeScript/JavaScript Weaknesses\
+\pard\tx20\tx808\pardeftab560\li808\fi-809\partightenfactor0
+\ls4\ilvl0
+\f4\b0\fs26 \cf2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f0 \up0 \nosupersub \ulnone No consistent standard library across environments (browser vs Node).\
+\ls4\ilvl0
+\f4 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f0 \up0 \nosupersub \ulnone Fragmented tooling and libraries.\
+\ls4\ilvl0
+\f4 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f0 \up0 \nosupersub \ulnone Less suitable for low-level system tasks.\
+\pard\pardeftab560\partightenfactor0
+\cf2 \
+\pard\pardeftab560\sa40\partightenfactor0
+
+\f2\fs32 \cf2 \uc0\u55358 \u56800 
+\f3\b  Use Case Fit\
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\qc\partightenfactor0
+
+\fs26 \cf2 Task
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\qc\partightenfactor0
+
+\f3\b\fs26 \cf2 \up0 \nosupersub \ulnone Best Choice
+\f1\b0\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx4320
+\clvertalt \clcbpat5 \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Building HTTP servers
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Go
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Web frontend
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone TypeScript
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx4320
+\clvertalt \clcbpat5 \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Command-line tools
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Go
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Browser scripting
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone TypeScript
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx4320
+\clvertalt \clcbpat5 \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone System tools and daemons
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Go
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Realtime frontend apps
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone TypeScript
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clcbpat5 \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx4320
+\clvertalt \clcbpat5 \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone REST/GraphQL API clients
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone TypeScript
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell \row
+
+\itap1\trowd \taflags1 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalt \clshdrawnil \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx4320
+\clvertalt \clshdrawnil \clwWidth4600\clftsWidth3 \clheight340 \clbrdrt\brdrs\brdrw20\brdrcf2 \clbrdrl\brdrs\brdrw20\brdrcf2 \clbrdrb\brdrs\brdrw20\brdrcf2 \clbrdrr\brdrs\brdrw20\brdrcf2 \clpadt20 \clpadl100 \clpadb20 \clpadr100 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone REST/GraphQL API servers
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone \cell 
+\pard\intbl\itap1\pardeftab560\partightenfactor0
+
+\f0\fs26 \cf2 \up0 \nosupersub \ulnone Go or TypeScript
+\f1\fs24 \cf0 \up0 \nosupersub \ulnone 
+\f3\b\fs32 \cf2 \up0 \nosupersub \ulnone \cell \lastrow\row
+\pard\pardeftab560\sa40\partightenfactor0
+
+\f2\b0 \cf2 \uc0\u55358 \u56809 
+\f3\b  Conclusion\
+\pard\tx20\tx808\pardeftab560\li808\fi-809\partightenfactor0
+\ls5\ilvl0
+\f4\b0\fs26 \cf2 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f3\b \up0 \nosupersub \ulnone Go\'92s standard library
+\f0\b0  is tightly integrated, stable, and very capable for building servers, tools, and concurrent applications without third-party dependencies.\
+\ls5\ilvl0
+\f4 \up0 \nosupersub \ulnone {\listtext	\uc0\u8226 	}
+\f3\b \up0 \nosupersub \ulnone TypeScript
+\f0\b0  leans on the broader JavaScript ecosystem and runtime-specific APIs (like Node or browser) rather than offering its own cohesive standard library.\
+\pard\pardeftab560\partightenfactor0
+\cf2 If you want consistency, concurrency, and batteries-included tooling, Go excels. If you want flexibility, especially in the browser or frontend ecosystem, TypeScript (via JavaScript) is hard to beat.\
+}
